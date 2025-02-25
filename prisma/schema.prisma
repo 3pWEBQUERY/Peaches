@@ -1,0 +1,281 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum KontoTyp {
+  MITGLIED
+  ESCORT
+  AGENTUR
+  ADMIN
+  MODERATOR
+}
+
+model User {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  password    String
+  anzeigename String?
+  profilbild  String?   // URL zum Profilbild
+  beschreibung String?  @db.Text
+  verifiziert Boolean   @default(false)
+  kontotyp    KontoTyp  @default(MITGLIED)
+  views       Int       @default(0)
+  
+  // Beziehungen
+  likes       Like[]    @relation("UserLikes")
+  likedBy     Like[]    @relation("LikedByUsers")
+  followers   Follow[]  @relation("Followers")
+  following   Follow[]  @relation("Following")
+  
+  // Posts Beziehungen
+  authoredPosts Post[]  @relation("AuthorToPosts")
+  postLikes   PostLike[] @relation("UserPostLikes")
+  comments    Comment[] @relation("UserComments")
+  
+  // Nachrichten Beziehungen
+  messages        Message[]
+  conversations   ConversationParticipant[]
+  
+  // Escort und Agentur Beziehungen
+  escortProfil      EscortProfil?    @relation("EscortToProfile")    // Für ESCORT Users (1:1)
+  agenturProfil     AgenturProfil?   @relation("AgenturToProfile")   // Für AGENTUR Users (1:1)
+  verwalteteEscorts EscortProfil[]   @relation("AgenturToProfile")   // Für AGENTUR Users (1:n)
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  fromUser  User     @relation("UserLikes", fields: [fromUserId], references: [id], onDelete: Cascade)
+  fromUserId String
+  toUser    User     @relation("LikedByUsers", fields: [toUserId], references: [id], onDelete: Cascade)
+  toUserId   String
+  createdAt DateTime @default(now())
+
+  @@unique([fromUserId, toUserId])
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  follower    User     @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId  String
+  following   User     @relation("Followers", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
+}
+
+model EscortProfil {
+  id              String   @id @default(cuid())
+  // Beziehung zum Escort selbst (wenn kontotyp = ESCORT)
+  escortUser      User?    @relation("EscortToProfile", fields: [escortUserId], references: [id], onDelete: Cascade)
+  escortUserId    String?  @unique  // Unique stellt sicher, dass ein Escort nur ein Profil haben kann
+  
+  // Beziehung zur Agentur (wenn kontotyp = AGENTUR)
+  agenturUser     User?    @relation("AgenturToProfile", fields: [agenturUserId], references: [id])
+  agenturUserId   String?
+  
+  // Grundinformationen
+  künstlername    String
+  slogan          String?
+  beschreibung    String?  @db.Text
+  geschlecht      String
+  alter           Int
+  
+  // Optische Merkmale
+  größe           Int
+  gewicht         Int?
+  koerperbau      String?
+  haarlaenge      String?
+  haarfarbe       String?
+  brusttyp        String?
+  brustgroesse    String?
+  intimbereich    String?
+  tattoos         String[]
+  piercings       String[]
+  
+  // Sonstiges
+  rauchen         String?
+  alkohol         String?
+  
+  // Weitere Felder
+  nationalität    String?
+  sprachen        Json     // Speichert LanguageSkill[] als JSON
+  services        String[]
+  
+  // Medien
+  anzeigebild     String?
+  logo            String?
+  bilder          String[] // URLs zu Bildern
+  videos          String[] // URLs zu Videos
+  
+  // Preise
+  stundensatz     Float
+  zwei_stunden    Float?
+  drei_stunden    Float?
+  uebernachtung   Float?
+  standardCurrency String  @default("EUR")
+  prices          Json?    // Speichert komplexe Preisstruktur
+  extras          String?  @db.Text
+  
+  // Standort
+  strasse         String?
+  hausnummer      String?
+  plz             String?
+  ort             String?
+  bundesland      String?
+  land            String?
+  anfahrt         String?  @db.Text
+  
+  // Kontakt
+  telefon         String?
+  whatsapp        String?
+  telegram        String?
+  signal          String?
+  email           String?
+  website         String?
+  socialMedia     Json?    // Speichert Social Media Links
+  erreichbar_24h  Boolean  @default(false)
+  termine_spontan Boolean  @default(false)
+  erreichbarkeit  String?  @db.Text
+  
+  // Zusätzliche Felder
+  blocked_countries String[]
+  tags             Json    // Speichert custom und selected tags
+  
+  // Beziehung zu Posts
+  posts     Post[]   @relation("EscortProfilePosts")
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Indizes
+  @@index([escortUserId])
+  @@index([agenturUserId])
+}
+
+model AgenturProfil {
+  id              String   @id @default(cuid())
+  // Beziehung zur Agentur
+  agenturUser     User     @relation("AgenturToProfile", fields: [agenturUserId], references: [id], onDelete: Cascade)
+  agenturUserId   String   @unique  // Unique stellt sicher, dass eine Agentur nur ein Profil haben kann
+  
+  // Grundinformationen
+  name            String
+  email           String
+  website         String?
+  contacts        Json     // Speichert Kontaktinformationen als JSON-Array
+  openingHours    Json     // Speichert Öffnungszeiten als JSON-Objekt
+  
+  // Beschreibung
+  description     String?  @db.Text
+  
+  // Standort
+  address         String?
+  plz             String?
+  city            String?
+  country         String?
+  
+  // Infrastruktur
+  infrastructure  String[] // Array von Infrastruktur-Features
+  
+  // Medien
+  logo            String?  // URL zum Logo
+  images          String[] // URLs zu Bildern
+  videos          String[] // URLs zu Videos
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([agenturUserId])
+}
+
+model Conversation {
+  id            String    @id @default(cuid())
+  messages      Message[]
+  participants  ConversationParticipant[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model ConversationParticipant {
+  id              String       @id @default(cuid())
+  user            User         @relation(fields: [userId], references: [id])
+  userId          String
+  conversation    Conversation @relation(fields: [conversationId], references: [id])
+  conversationId  String
+  createdAt       DateTime     @default(now())
+
+  @@unique([userId, conversationId])
+}
+
+model Message {
+  id              String       @id @default(cuid())
+  content         String
+  sender          User         @relation(fields: [senderId], references: [id])
+  senderId        String
+  conversation    Conversation @relation(fields: [conversationId], references: [id])
+  conversationId  String
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@index([conversationId])
+  @@index([senderId])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  images    String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Beziehung zum Author (User)
+  author    User     @relation("AuthorToPosts", fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  
+  // Beziehung zum EscortProfil (optional)
+  escortProfil   EscortProfil? @relation("EscortProfilePosts", fields: [escortProfilId], references: [id])
+  escortProfilId String?
+  
+  // Weitere Beziehungen
+  likes     PostLike[]
+  comments  Comment[]
+
+  @@index([authorId])
+  @@index([escortProfilId])
+}
+
+model PostLike {
+  id        String   @id @default(cuid())
+  user      User     @relation("UserPostLikes", fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+  @@index([postId])
+  @@index([userId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  author    User     @relation("UserComments", fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([postId])
+  @@index([authorId])
+}

@@ -1,0 +1,111 @@
+export interface Language {
+  code: string;
+  name: string;
+  flag: string;
+  nativeName: string;
+}
+
+export const languages: Language[] = [
+  // Europäische Sprachen
+  { code: 'de', name: 'Deutsch', nativeName: 'Deutsch', flag: '🇩🇪' },
+  { code: 'en', name: 'Englisch', nativeName: 'English', flag: '🇬🇧' },
+  { code: 'fr', name: 'Französisch', nativeName: 'Français', flag: '🇫🇷' },
+  { code: 'es', name: 'Spanisch', nativeName: 'Español', flag: '🇪🇸' },
+  { code: 'it', name: 'Italienisch', nativeName: 'Italiano', flag: '🇮🇹' },
+  { code: 'pt', name: 'Portugiesisch', nativeName: 'Português', flag: '🇵🇹' },
+  { code: 'nl', name: 'Niederländisch', nativeName: 'Nederlands', flag: '🇳🇱' },
+  { code: 'pl', name: 'Polnisch', nativeName: 'Polski', flag: '🇵🇱' },
+  { code: 'ru', name: 'Russisch', nativeName: 'Русский', flag: '🇷🇺' },
+  { code: 'uk', name: 'Ukrainisch', nativeName: 'Українська', flag: '🇺🇦' },
+  { code: 'be', name: 'Belarussisch', nativeName: 'Беларуская', flag: '🇧🇾' },
+  { code: 'bg', name: 'Bulgarisch', nativeName: 'Български', flag: '🇧🇬' },
+  { code: 'cs', name: 'Tschechisch', nativeName: 'Čeština', flag: '🇨🇿' },
+  { code: 'sk', name: 'Slowakisch', nativeName: 'Slovenčina', flag: '🇸🇰' },
+  { code: 'sl', name: 'Slowenisch', nativeName: 'Slovenščina', flag: '🇸🇮' },
+  { code: 'hr', name: 'Kroatisch', nativeName: 'Hrvatski', flag: '🇭🇷' },
+  { code: 'bs', name: 'Bosnisch', nativeName: 'Bosanski', flag: '🇧🇦' },
+  { code: 'sr', name: 'Serbisch', nativeName: 'Српски', flag: '🇷🇸' },
+  { code: 'mk', name: 'Mazedonisch', nativeName: 'Македонски', flag: '🇲🇰' },
+  { code: 'sq', name: 'Albanisch', nativeName: 'Shqip', flag: '🇦🇱' },
+  { code: 'el', name: 'Griechisch', nativeName: 'Ελληνικά', flag: '🇬🇷' },
+  { code: 'hu', name: 'Ungarisch', nativeName: 'Magyar', flag: '🇭🇺' },
+  { code: 'ro', name: 'Rumänisch', nativeName: 'Română', flag: '🇷🇴' },
+  { code: 'sv', name: 'Schwedisch', nativeName: 'Svenska', flag: '🇸🇪' },
+  { code: 'da', name: 'Dänisch', nativeName: 'Dansk', flag: '🇩🇰' },
+  { code: 'no', name: 'Norwegisch', nativeName: 'Norsk', flag: '🇳🇴' },
+  { code: 'fi', name: 'Finnisch', nativeName: 'Suomi', flag: '🇫🇮' },
+  { code: 'et', name: 'Estnisch', nativeName: 'Eesti', flag: '🇪🇪' },
+  { code: 'lv', name: 'Lettisch', nativeName: 'Latviešu', flag: '🇱🇻' },
+  { code: 'lt', name: 'Litauisch', nativeName: 'Lietuvių', flag: '🇱🇹' },
+  { code: 'is', name: 'Isländisch', nativeName: 'Íslenska', flag: '🇮🇸' },
+  { code: 'ga', name: 'Irisch', nativeName: 'Gaeilge', flag: '🇮🇪' },
+  { code: 'gd', name: 'Schottisch-Gälisch', nativeName: 'Gàidhlig', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
+  { code: 'cy', name: 'Walisisch', nativeName: 'Cymraeg', flag: '🏴󠁧󠁢󠁷󠁬󠁳󠁿' },
+  { code: 'eu', name: 'Baskisch', nativeName: 'Euskara', flag: '🇪🇸' },
+  { code: 'ca', name: 'Katalanisch', nativeName: 'Català', flag: '🇪🇸' },
+  { code: 'gl', name: 'Galicisch', nativeName: 'Galego', flag: '🇪🇸' },
+  { code: 'oc', name: 'Okzitanisch', nativeName: 'Occitan', flag: '🇫🇷' },
+
+  // Asiatische Sprachen
+  { code: 'zh', name: 'Chinesisch (Mandarin)', nativeName: '中文', flag: '🇨🇳' },
+  { code: 'yue', name: 'Kantonesisch', nativeName: '粵語', flag: '🇭🇰' },
+  { code: 'ja', name: 'Japanisch', nativeName: '日本語', flag: '🇯🇵' },
+  { code: 'ko', name: 'Koreanisch', nativeName: '한국어', flag: '🇰🇷' },
+  { code: 'vi', name: 'Vietnamesisch', nativeName: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'th', name: 'Thai', nativeName: 'ไทย', flag: '🇹🇭' },
+  { code: 'my', name: 'Burmesisch', nativeName: 'မြန်မာစာ', flag: '🇲🇲' },
+  { code: 'km', name: 'Khmer', nativeName: 'ភាសាខ្មែរ', flag: '🇰🇭' },
+  { code: 'lo', name: 'Laotisch', nativeName: 'ລາວ', flag: '🇱🇦' },
+  { code: 'id', name: 'Indonesisch', nativeName: 'Bahasa Indonesia', flag: '🇮🇩' },
+  { code: 'ms', name: 'Malaiisch', nativeName: 'Bahasa Melayu', flag: '🇲🇾' },
+  { code: 'tl', name: 'Tagalog', nativeName: 'Tagalog', flag: '🇵🇭' },
+  { code: 'mn', name: 'Mongolisch', nativeName: 'Монгол', flag: '🇲🇳' },
+  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: '🇵🇰' },
+  { code: 'bn', name: 'Bengalisch', nativeName: 'বাংলা', flag: '🇧🇩' },
+  { code: 'pa', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ', flag: '🇮🇳' },
+  { code: 'ta', name: 'Tamil', nativeName: 'தமிழ்', flag: '🇮🇳' },
+  { code: 'te', name: 'Telugu', nativeName: 'తెలుగు', flag: '🇮🇳' },
+  { code: 'mr', name: 'Marathi', nativeName: 'मराठी', flag: '🇮🇳' },
+  { code: 'gu', name: 'Gujarati', nativeName: 'ગુજરાતી', flag: '🇮🇳' },
+  { code: 'kn', name: 'Kannada', nativeName: 'ಕನ್ನಡ', flag: '🇮🇳' },
+  { code: 'ml', name: 'Malayalam', nativeName: 'മലയാളം', flag: '🇮🇳' },
+  { code: 'si', name: 'Singhalesisch', nativeName: 'සිංහල', flag: '🇱🇰' },
+  { code: 'ne', name: 'Nepalesisch', nativeName: 'नेपाली', flag: '🇳🇵' },
+
+  // Nahöstliche Sprachen
+  { code: 'ar', name: 'Arabisch', nativeName: 'العربية', flag: '🇸🇦' },
+  { code: 'fa', name: 'Persisch', nativeName: 'فارسی', flag: '🇮🇷' },
+  { code: 'he', name: 'Hebräisch', nativeName: 'עברית', flag: '🇮🇱' },
+  { code: 'tr', name: 'Türkisch', nativeName: 'Türkçe', flag: '🇹🇷' },
+  { code: 'ku', name: 'Kurdisch', nativeName: 'Kurdî', flag: '🇮🇶' },
+  { code: 'hy', name: 'Armenisch', nativeName: 'Հայերեն', flag: '🇦🇲' },
+  { code: 'ka', name: 'Georgisch', nativeName: 'ქართული', flag: '🇬🇪' },
+  { code: 'az', name: 'Aserbaidschanisch', nativeName: 'Azərbaycan', flag: '🇦🇿' },
+
+  // Afrikanische Sprachen
+  { code: 'am', name: 'Amharisch', nativeName: 'አማርኛ', flag: '🇪🇹' },
+  { code: 'sw', name: 'Swahili', nativeName: 'Kiswahili', flag: '🇹🇿' },
+  { code: 'ha', name: 'Hausa', nativeName: 'Hausa', flag: '🇳🇬' },
+  { code: 'yo', name: 'Yoruba', nativeName: 'Yorùbá', flag: '🇳🇬' },
+  { code: 'ig', name: 'Igbo', nativeName: 'Igbo', flag: '🇳🇬' },
+  { code: 'zu', name: 'Zulu', nativeName: 'isiZulu', flag: '🇿🇦' },
+  { code: 'xh', name: 'Xhosa', nativeName: 'isiXhosa', flag: '🇿🇦' },
+  { code: 'af', name: 'Afrikaans', nativeName: 'Afrikaans', flag: '🇿🇦' },
+  { code: 'mg', name: 'Malagasy', nativeName: 'Malagasy', flag: '🇲🇬' },
+  { code: 'so', name: 'Somali', nativeName: 'Soomaali', flag: '🇸🇴' },
+
+  // Amerikanische Sprachen
+  { code: 'qu', name: 'Quechua', nativeName: 'Runa Simi', flag: '🇵🇪' },
+  { code: 'ay', name: 'Aymara', nativeName: 'Aymar', flag: '🇧🇴' },
+  { code: 'gn', name: 'Guaraní', nativeName: "Avañe'ẽ", flag: '🇵🇾' },
+  { code: 'nah', name: 'Nahuatl', nativeName: 'Nāhuatl', flag: '🇲🇽' },
+  { code: 'ht', name: 'Haitianisch', nativeName: 'Kreyòl Ayisyen', flag: '🇭🇹' },
+
+  // Pazifische Sprachen
+  { code: 'mi', name: 'Maori', nativeName: 'Te Reo Māori', flag: '🇳🇿' },
+  { code: 'haw', name: 'Hawaiianisch', nativeName: 'ʻŌlelo Hawaiʻi', flag: '🇺🇸' },
+  { code: 'sm', name: 'Samoanisch', nativeName: 'Gagana Sāmoa', flag: '🇼🇸' },
+  { code: 'to', name: 'Tongaisch', nativeName: 'Lea Faka-Tonga', flag: '🇹🇴' },
+  { code: 'fj', name: 'Fidschi', nativeName: 'Na Vosa Vakaviti', flag: '🇫🇯' }
+].sort((a, b) => a.name.localeCompare(b.name)); 
