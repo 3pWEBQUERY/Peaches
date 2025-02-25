@@ -2,13 +2,13 @@
 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FormData } from '@/types/form';
+import { AgenturFormData } from '@/types/agentur';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 
 interface StandortTabProps {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
+  formData: AgenturFormData;
+  setFormData: React.Dispatch<React.SetStateAction<AgenturFormData>>;
   onTabChange: (tab: string) => void;
 }
 
