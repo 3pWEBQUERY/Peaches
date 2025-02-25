@@ -80,7 +80,8 @@ export function NewsfeedView({ data }: NewsfeedViewProps) {
       { name: 'newsfeed' },
       { name: 'social' }
     ],
-    favoriteProfiles: []
+    favoriteProfiles: [],
+    openingHours: [] // Leeres Array für Newsfeed-View
   };
 
   // Funktion zum Formatieren des Datums
