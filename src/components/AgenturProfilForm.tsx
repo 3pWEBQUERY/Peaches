@@ -30,6 +30,7 @@ const initialFormData: AgenturFormData = {
     { day: 'Samstag', open: false, from: '09:00', to: '18:00' },
     { day: 'Sonntag', open: false, from: '09:00', to: '18:00' }
   ],
+  preise: [],
   description: '',
   logo: '',
   images: [],
