@@ -59,7 +59,8 @@ export default function NewsfeedCreate({ data }: NewsfeedCreateProps) {
       { name: 'newsfeed' },
       { name: 'social' }
     ],
-    favoriteProfiles: []
+    favoriteProfiles: [],
+    openingHours: [] // Leeres Array für Newsfeed-Posts
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
