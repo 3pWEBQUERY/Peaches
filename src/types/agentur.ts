@@ -19,6 +19,13 @@ export interface AgenturFormData {
     to: string;
   }[];
 
+  // Preise
+  preise: {
+    duration: string;
+    amount: number;
+    currency: string;
+  }[];
+
   // Beschreibung
   description?: string;
   
