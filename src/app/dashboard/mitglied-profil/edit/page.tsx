@@ -48,7 +48,8 @@ async function getProfileData() {
     kontotyp: 'MITGLIED' as const,
     followers: user.followers.map(f => f.follower),
     following: user.following.map(f => f.following),
-    likedBy: user.likedBy.map(l => l.fromUser)
+    likedBy: user.likedBy.map(l => l.fromUser),
+    beschreibung: user.beschreibung || undefined
   };
 }
 
