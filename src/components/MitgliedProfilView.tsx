@@ -42,7 +42,8 @@ export function MitgliedProfilView({ user }: MitgliedProfilViewProps) {
     favoriteProfiles: user.followers.slice(0, 3).map(follower => ({
       imageUrl: follower.profilbild || '/placeholder-avatar.jpg',
       alt: follower.anzeigename || 'Follower'
-    }))
+    })),
+    openingHours: [] // Leeres Array für Mitglieder, da sie keine Öffnungszeiten haben
   };
 
   return (
