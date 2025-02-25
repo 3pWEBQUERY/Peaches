@@ -49,6 +49,15 @@ export default async function DashboardPage() {
       { imageUrl: '/placeholder-avatar.jpg', alt: 'Profile 4' },
       { imageUrl: '/placeholder-avatar.jpg', alt: 'Profile 5' },
     ],
+    openingHours: [
+      { day: 'Montag', hours: '09:00 - 20:00' },
+      { day: 'Dienstag', hours: '09:00 - 20:00' },
+      { day: 'Mittwoch', hours: '09:00 - 20:00' },
+      { day: 'Donnerstag', hours: '09:00 - 20:00' },
+      { day: 'Freitag', hours: '09:00 - 22:00' },
+      { day: 'Samstag', hours: '10:00 - 22:00' },
+      { day: 'Sonntag', hours: 'Geschlossen' },
+    ],
   };
 
   return (
